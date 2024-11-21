@@ -1,0 +1,1 @@
+type 'air' to run or 'go run main.go' to run
