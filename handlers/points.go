@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"fmt"
 	"math"
 	"strconv"
 	"strings"
@@ -46,8 +45,6 @@ func calculatePoints(receipt models.Receipt) int {
 		}
 	}
 
-	fmt.Println("points from retailer: ", points)
-
 	points += calculateFiscalPoints(receipt.Total)
 	points += calculateItemPoints(receipt.Items)
 	points += calculateDateTimePoints(receipt.PurchaseDate, receipt.PurchaseTime)
@@ -75,12 +72,10 @@ func calculateDateTimePoints(purchaseDate string, purchaseTime string) int {
 	if err != nil {
 		return 0
 	}
-	fmt.Println("hour: ", hour)
+
 	if hour >= 14 && hour < 16 {
 		points += 10
 	}
-
-	fmt.Println("points from date and time: ", points)
 
 	return points
 }
@@ -104,8 +99,6 @@ func calculateItemPoints(items []models.ReceiptItem) int {
 	// 5 points for every two items on the receipt
 	points += (len(items) / 2) * 5
 
-	fmt.Println("points from items: ", points)
-
 	return points
 }
 
@@ -127,8 +120,6 @@ func calculateFiscalPoints(total string) int {
 	if int(totalFloat*100)%25 == 0 {
 		points += 25
 	}
-
-	fmt.Println("points from total: ", points)
 
 	return points
 }
